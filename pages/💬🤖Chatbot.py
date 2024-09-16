@@ -18,7 +18,12 @@ st.set_page_config(
     page_icon= "💬🤖",
     layout="wide"
 )
-   
+
+st.markdown("<h1 style='text-align: center;'>🤖 MyFitnessBuddy</h1>",unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Your AI-powered personal fitness advisor for tailored workouts, diet plans, and nutrition insights.</p>",unsafe_allow_html=True)
+st.subheader("", divider='rainbow')
+
+
 # Get Azure OpenAI endpoint from environment variables
 azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
 credential_chain = DefaultAzureCredential()

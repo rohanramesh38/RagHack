@@ -12,6 +12,8 @@ from gremlin_python.driver import client, serializer
 
 load_dotenv()
 
+
+
 azure_cosmodb_gremlin_endpoint = os.getenv("AZURE_COSMODB_GREMLIN_ENDPOINT")
 azure_cosmodb_gremlin_username = os.getenv("AZURE_COSMODB_GREMLIN_USERNAME")
 azure_cosmodb_gremlin_key = os.getenv("AZURE_COSMODB_GREMLIN_KEY")
@@ -26,6 +28,9 @@ st.set_page_config(
     layout="wide"
 )
 
+st.markdown("<h1 style='text-align: center;'>🤖 MyFitnessBuddy</h1>",unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Your AI-powered personal fitness advisor for tailored workouts, diet plans, and nutrition insights.</p>",unsafe_allow_html=True)
+st.subheader("", divider='rainbow')
 foodcategory_list = ['Vegetables', 'FastFood', 'Fish&Seafood', 'Meat', 'Fruits']
 
 st.title('🥘 Food Calorie Calculator')

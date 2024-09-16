@@ -12,6 +12,9 @@ st.set_page_config(
     page_icon="🗒️🍎🥗",
     layout="wide"
 )
+st.markdown("<h1 style='text-align: center;'>🤖 MyFitnessBuddy</h1>",unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Your AI-powered personal fitness advisor for tailored workouts, diet plans, and nutrition insights.</p>",unsafe_allow_html=True)
+st.subheader("", divider='rainbow')
 azure_search_endpoint = os.getenv("AZURE_AI_SEARCH_ENDPOINT")
 azure_search_index = os.getenv("AZURE_AI_SEARCH_INDEX")
 
