@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            min-width: 800px;
+            height: 95vh; /* Full viewport height */
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .sidebar {
+            width: 850px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            color: #fff;
+        }
+
+        .sidebar label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .sidebar input[type="text"], 
+        .sidebar input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            margin: 10px;
+
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #007BFF;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .chat-box {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background-color: #d1f7c4;
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background-color: #f0f0f0;
+            text-align: left;
+        }
+
+        .input-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            width: 75%;
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            outline: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007BFF;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .clear-btn {
+            background-color: #ff4d4d;
+        }
+
+        .clear-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Settings</h3>
+        <label for="apiEndpoint">API Endpoint:</label>
+        <input type="text" id="apiEndpoint" placeholder="Enter API endpoint" />
+        
+        <label for="apiKey">API Key:</label>
+        <input type="password" id="apiKey" placeholder="Enter API key" />
+        <button class="toggle-btn" onclick="togglePassword()">Show/Hide API Key</button>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <!-- Messages will appear here -->
+        </div>
+
+        <div class="loading" id="loadingSpinner"></div>
+
+        <div class="input-section">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <div class="button-group">
+            <button class="clear-btn" onclick="clearChat()">Clear Chat</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            const apiKey = document.getElementById('apiKey').value;
+            const apiEndpoint = document.getElementById('apiEndpoint').value;
+    
+            if (userInput.trim() === '') {
+                alert("Please enter a message.");
+                return;
+            }
+    
+            const chatBox = document.getElementById('chatBox');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+    
+            // Add user message to chatbox
+            chatBox.innerHTML += `<div class="message user">${userInput}</div>`;
+            document.getElementById('userInput').value = ''; // Clear input
+            document.getElementById('userInput').focus(); // Keep focus on input
+            loadingSpinner.style.display = 'block';
+    
+            // Send the message to the Flask back-end
+            fetch('/api/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput , api_key: apiKey, api_endpoint: apiEndpoint })
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Request failed with status code " + response.status);
+                }
+            })
+            .then((json) => {
+                loadingSpinner.style.display = 'none'; // Hide loading spinner
+    
+                if (json.reply) {
+                    // Display the bot's reply in the chatbox
+                    chatBox.innerHTML += `<div class="message bot">${json.reply}</div>`;
+                } else {
+                    // Handle empty or undefined response
+                    chatBox.innerHTML += `<div class="message bot">[Error: No reply from the server]</div>`;
+                }
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+            })
+            .catch((error) => {
+                loadingSpinner.style.display = 'none'; // Hide loading spinner
+                chatBox.innerHTML += `<div class="message bot">[Error: ${error.message}]</div>`;
+            });
+        }
+        // Clear chat function
+    function clearChat() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML = ''; // Clear the chatbox content
+    }
+
+    // Show/Hide API Key function
+    function togglePassword() {
+        const apiKeyInput = document.getElementById('apiKey');
+        const type = apiKeyInput.getAttribute('type');
+        if (type === 'password') {
+            apiKeyInput.setAttribute('type', 'text');
+        } else {
+            apiKeyInput.setAttribute('type', 'password');
+        }
+    }
+    </script>
+</body>
+</html>
