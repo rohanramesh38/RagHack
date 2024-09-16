@@ -70,3 +70,23 @@ This hybrid approach ensures accurate, context-aware, and personalized fitness g
 - **Data Processing and Logic Flow:** Azure AI Studio, Azure Prompt Flow.
 - **Backend and Application Server:** Python for data extraction and preprocessing, with multiple integration points for data ingestion and retrieval.
 
+## Target Audience:
+
+- **Fitness Enthusiasts:** Individuals who are passionate about fitness and are looking for personalized workout routines and diet plans to optimize their fitness journey.
+- **Health-Conscious Individuals:** People who prioritize a healthy lifestyle and want easy access to accurate nutritional information, calorie tracking, and tailored dietary advice.
+- **Beginners in Fitness:** Newcomers who need guidance on starting their fitness journey, including basic workout routines, dietary recommendations, and answers to common fitness-related questions.
+- **Busy Professionals:** Users with limited time for fitness planning who seek convenient, on-demand access to customized fitness guidance and quick answers to health-related queries.
+- **Individuals with Specific Health Goals:** Those with unique fitness goals or health conditions who require personalized plans and advice that consider their specific needs and preferences.
+
+## Conclusion and Future Works:
+
+### Conclusion
+
+MyFitnessBuddy demonstrates the potential of combining advanced AI techniques like Retrieval-Augmented Generation (RAG) and Graph Retrieval-Augmented Generation (GRAG) to create a highly personalized and context-aware fitness advisor. By leveraging Azure AI's capabilities and integrating multiple data sources, the app provides customized workout routines, dietary plans, and accurate responses to user queries. This approach enhances user engagement and satisfaction by delivering tailored and relevant fitness guidance.
+
+### Future Work
+
+- **Enhanced Personalization:** Further refine the models to provide more granular customization based on user feedback, behavior, and preferences.
+- **Multilingual Support:** Implement multilingual capabilities to reach a broader audience globally.
+- **Advanced Analytics:** Develop advanced analytics features to provide users with deeper insights into their fitness progress, habits, and trends.
+- **Expanded Data Sources:** Incorporate additional data sources such as medical databases and user-generated content to enhance the app’s knowledge base and improve recommendation accuracy.
