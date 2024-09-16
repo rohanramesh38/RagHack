@@ -84,7 +84,8 @@ We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent
 - Relevant information is retrieved from the selected data source and sent to Azure OpenAI Services (ChatGPT) along with a crafted prompt to generate a personalized response.
 - The final response, enriched with contextually relevant information, is returned to the user via the Streamlit app, providing tailored fitness advice and recommendations.
 
-
+![Application](images/app4.png)
+![Application](images/app5.png)
 ![Application](images/app0.png)
 ![Application](images/app.png)
 ![Application](images/app1.png)

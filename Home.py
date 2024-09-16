@@ -48,7 +48,7 @@ with tab2:
     ### Implementation Overview:
 
     #### Data Extraction and Ingestion:""",unsafe_allow_html=True)
-    st.image("/Users/jeeva/Documents/RagHack/images/ArchitectureExtraction.png",caption="Fig 2. Data Extraction Architecture")
+    st.image("/Users/jeeva/Documents/RagHack/images/ArchitectureExtract.png",caption="Fig 2. Data Extraction Architecture")
     st.markdown("""
     <ul>
     <li>The process begins with a Python script that extracts structured and unstructured data from various sources. This data is then ingested into two different storage systems:
@@ -76,6 +76,24 @@ with tab2:
     st.image("/Users/jeeva/Documents/RagHack/images/graph1.png")
     st.image("/Users/jeeva/Documents/RagHack/images/graph2.png",caption="Fig 4. Example of how Unstructured Data is stored as Graph in Azure CosmoDB(Gremlin API)")
 
+    st.markdown("""## Azure AI Studio:""")
+    st.image("/Users/jeeva/Documents/RagHack/images/ArchitectureAIstudio.png",caption="Fig 5. Azure AI Studio Architecture")
+    st.markdown("""
+    ### Prompt Flow
+    We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent** endpoint, and the other is a **My Fitness Buddy**. These endpoints are designed to solve two different use cases: one focuses on optimizing document retrieval through query generation, while the other offers personalized fitness advice within predefined safe boundaries with the knowledge base of the RAG.
+
+    #### 1. Rewrite Intent Endpoint
+    **Purpose**: This endpoint was designed to handle a specific task: generating search queries based on a user's question and previous conversation history. By combining the "current user question" and prior context, the endpoint generates a **single canonical query** that includes all necessary details, without variants. This is employed for document retrieval systems, where generating these precise queries and intent leading to more accurate results.
+    """,unsafe_allow_html=True)
+
+    st.image("/Users/jeeva/Documents/RagHack/images/rewiteintent.png",caption="Fig 6. Flow of Rewrite Intent endpoint")
+
+    st.markdown("""#### 2. My Fitness Buddy endpoint
+    **Purpose**: The second endpoint is a **My Fitness Buddy** that offers personalized fitness advice, workout plans, and nutrition tips based on user input. The assistant is programmed to avoid medical advice and stick solely to the provided dataset to ensure that all recommendations are safe, motivational, and evidence-based and the knowledge base is retreived for the chuncks of documents configured as search indexes.
+    """,unsafe_allow_html=True)
+
+    st.image("/Users/jeeva/Documents/RagHack/images/myfitnessbudy.png",caption="Fig 7. Flow of My Fitness Buddy endpoint")
+
     st.markdown("""
     ### Application Flow:
     - The user interacts with the MyFitnessBuddy app through a Python Streamlit-based chatbot interface.
@@ -84,9 +102,13 @@ with tab2:
     - The final response, enriched with contextually relevant information, is returned to the user via the Streamlit app, providing tailored fitness advice and recommendations.
     """,unsafe_allow_html=True)
 
+    st.image("/Users/jeeva/Documents/RagHack/images/app4.png")
+    st.image("/Users/jeeva/Documents/RagHack/images/app5.png")
     st.image("/Users/jeeva/Documents/RagHack/images/app.png")
     st.image("/Users/jeeva/Documents/RagHack/images/app1.png")
     st.image("/Users/jeeva/Documents/RagHack/images/app2.png",caption="Fig 5. Application")
+
+    st.image("/Users/jeeva/Documents/RagHack/images/testingTool.png",caption="Fig 9. Testing tool for endpoints")
 
 with tab3:
     st.markdown("""
