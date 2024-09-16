@@ -1,0 +1,73 @@
+{
+  "package": {},
+  "code": {
+    "ragcore/prompt_templates/rewriteIntent.jinja2": {
+      "name": "rewriteIntent.jinja2",
+      "type": "prompt",
+      "inputs": {
+        "conversation": {
+          "type": [
+            "string"
+          ],
+          "allow_manual_entry": false,
+          "is_multi_select": false
+        }
+      },
+      "source": "ragcore/prompt_templates/rewriteIntent.jinja2",
+      "is_builtin": false,
+      "toolId": "ragcore/prompt_templates/rewriteIntent.jinja2"
+    },
+    "extractSearchIntent.py": {
+      "name": "extractSearchIntent.py",
+      "type": "python",
+      "inputs": {
+        "intent": {
+          "type": [
+            "object"
+          ],
+          "allow_manual_entry": false,
+          "is_multi_select": false,
+          "value": "${rewriteIntent.output}"
+        }
+      },
+      "source": "extractSearchIntent.py",
+      "function": "extract_search_intent",
+      "is_builtin": false,
+      "toolId": "extractSearchIntent.py"
+    },
+    "formatConversationForIntentRewriting.py": {
+      "name": "formatConversationForIntentRewriting.py",
+      "type": "python",
+      "inputs": {
+        "history": {
+          "type": [
+            "object"
+          ],
+          "allow_manual_entry": false,
+          "is_multi_select": false,
+          "value": "${inputs.chat_history}"
+        },
+        "max_tokens": {
+          "type": [
+            "int"
+          ],
+          "allow_manual_entry": false,
+          "is_multi_select": false,
+          "value": "2000"
+        },
+        "query": {
+          "type": [
+            "string"
+          ],
+          "allow_manual_entry": false,
+          "is_multi_select": false,
+          "value": "${inputs.query}"
+        }
+      },
+      "source": "formatConversationForIntentRewriting.py",
+      "function": "format_rewrite_intent_inputs",
+      "is_builtin": false,
+      "toolId": "formatConversationForIntentRewriting.py"
+    }
+  }
+}

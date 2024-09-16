@@ -1,0 +1,61 @@
+id: template_chat_flow
+name: Template Chat Flow
+inputs:
+  chat_history:
+    type: list
+    default: []
+    is_chat_input: false
+    is_chat_history: true
+  query:
+    type: string
+    default: ""
+    is_chat_input: true
+outputs:
+  reply:
+    type: string
+    reference: ${extractSearchIntent.output}
+    is_chat_output: true
+  documents:
+    type: string
+    reference: ${selectChunks.output}
+    is_chat_output: false
+nodes:
+- name: formatRewriteIntentInputs
+  type: python
+  source:
+    type: code
+    path: formatConversationForIntentRewriting.py
+  inputs:
+    history: ${inputs.chat_history}
+    max_tokens: 2000
+    query: ${inputs.query}
+  use_variants: false
+- name: rewriteIntent
+  type: llm
+  source:
+    type: code
+    path: ragcore/prompt_templates/rewriteIntent.jinja2
+  inputs:
+    deployment_name: gpt-35-turbo
+    temperature: 0.7
+    top_p: 0.95
+    max_tokens: 120
+    presence_penalty: 0
+    frequency_penalty: 0
+    conversation: ${formatRewriteIntentInputs.output}
+  provider: AzureOpenAI
+  connection: aihubresouce6855679784_aoai
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: extractSearchIntent
+  type: python
+  source:
+    type: code
+    path: extractSearchIntent.py
+  inputs:
+    intent: ${rewriteIntent.output}
+  use_variants: false
+node_variants: {}
+environment:
+  python_requirements_txt: requirements.txt
