@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.gitignore
 # C extensions
 *.so
 
@@ -136,7 +137,7 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
-
+.DS_Store/*
 # mkdocs documentation
 /site
 
@@ -164,4 +165,7 @@ cython_debug/
 
 .DS_Store
 data/.DS_Store
+.gitignore
+.DS_Store
+.DS_Store
 .gitignore

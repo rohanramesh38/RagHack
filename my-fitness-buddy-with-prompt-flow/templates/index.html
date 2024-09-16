@@ -168,6 +168,9 @@
         <label for="apiKey">API Key:</label>
         <input type="password" id="apiKey" placeholder="Enter API key" />
         <button class="toggle-btn" onclick="togglePassword()">Show/Hide API Key</button>
+
+        <label for="modelName">Model:</label>
+        <input type="text" id="modelName" placeholder="Enter Model Name" />
     </div>
 
     <div class="chat-container">
@@ -192,6 +195,7 @@
             const userInput = document.getElementById('userInput').value;
             const apiKey = document.getElementById('apiKey').value;
             const apiEndpoint = document.getElementById('apiEndpoint').value;
+            const modelName = document.getElementById('modelName').value;
     
             if (userInput.trim() === '') {
                 alert("Please enter a message.");
@@ -213,7 +217,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ message: userInput , api_key: apiKey, api_endpoint: apiEndpoint })
+                body: JSON.stringify({ message: userInput , api_key: apiKey, api_endpoint: apiEndpoint,model_name:modelName })
             })
             .then((response) => {
                 if (response.ok) {
