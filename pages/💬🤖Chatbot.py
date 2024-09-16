@@ -79,18 +79,14 @@ st.set_page_config(
 )
 is_prompt_flow=False
 
-toggle = st.radio("Configure Fitness Buddy as", ( "RAG with AI Seach","RAG with Prompt Flow endpoint",))
-
-# Display the result based on the toggle state
-if toggle == "RAG with Prompt Flow endpoint":
-   is_prompt_flow=True
-else:
-    sis_prompt_flow=False
 
 
 st.markdown("<h1 style='text-align: center;'>🤖 MyFitnessBuddy</h1>",unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Your AI-powered personal fitness advisor for tailored workouts, diet plans, and nutrition insights.</p>",unsafe_allow_html=True)
 st.subheader("", divider='rainbow')
+
+is_prompt_flow = st.toggle("Use AI Studio")
+
 # Get Azure OpenAI endpoint from environment variables
 azure_oai_endpoint = os.getenv("AZURE_OAI_ENDPOINT")
 credential_chain = DefaultAzureCredential()

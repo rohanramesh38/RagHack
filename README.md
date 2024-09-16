@@ -53,16 +53,43 @@ This hybrid approach ensures accurate, context-aware, and personalized fitness g
 ![AzureCosmoDB](images/graph2.png)
 <p style="text-align:center;"><i>Fig 4. Example of how Unstructured Data is stored as Graph in Azure CosmoDB(Gremlin API)</i></p>
 
+
+### Prompt Flow
+We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent** endpoint, and the other is a **My Fitness Buddy**. These endpoints are designed to solve two different use cases: one focuses on optimizing document retrieval through query generation, while the other offers personalized fitness advice within predefined safe boundaries with the knowledge base of the RAG.
+
+#### 1. Rewrite Intent Endpoint
+**Purpose**: This endpoint was designed to handle a specific task: generating search queries based on a user's question and previous conversation history. By combining the "current user question" and prior context, the endpoint generates a **single canonical query** that includes all necessary details, without variants. This is employed for document retrieval systems, where generating these precise queries and intent leading to more accurate results.
+
+<div style="text-align:center;">
+    <img src="./images/rewiteintent.png" alt="rewrite intent" width="330"/>
+    <p><i>Fig 5. Flow of Rewrite Intent endpoint</i></p>
+</div>
+
+
+
+#### 2. My Fitness Buddy endpoint
+**Purpose**: The second endpoint is a **My Fitness Buddy** that offers personalized fitness advice, workout plans, and nutrition tips based on user input. The assistant is programmed to avoid medical advice and stick solely to the provided dataset to ensure that all recommendations are safe, motivational, and evidence-based and the knowledge base is retreived for the chuncks of documents configured as search indexes.
+
+<div style="text-align:center;">
+    <img src="./images/myfitnessbudy.png" alt="rewite intent" width="450"/>
+    <p style="text-align:center;"><i>Fig 6. Flow of My Fitness Buddy endpoint </i></p>
+</div>
+
 ### Application Flow:
 - The user interacts with the MyFitnessBuddy app through a Python Streamlit-based chatbot interface.
 - The application server processes the user's query and directs it to the appropriate retrieval system (Azure AI Search for structured data or Azure Cosmos DB for unstructured data) based on the query type.
 - Relevant information is retrieved from the selected data source and sent to Azure OpenAI Services (ChatGPT) along with a crafted prompt to generate a personalized response.
 - The final response, enriched with contextually relevant information, is returned to the user via the Streamlit app, providing tailored fitness advice and recommendations.
 
+
+![Application](images/app0.png)
 ![Application](images/app.png)
 ![Application](images/app1.png)
 ![Application](images/app2.png)
-<p style="text-align:center;"><i>Fig 5. Application</i></p>
+<p style="text-align:center;"><i>Fig 7. Application</i></p>
+
+![Application](images/testingTool.png)
+<p style="text-align:center;"><i>Fig 7. Testing tool for endpoints</i></p>
 
 ## Technologies Used:
 - **Data Storage and Retrieval:** Azure Blob Storage, Azure Cosmos DB (Gremlin API), Azure AI Search.

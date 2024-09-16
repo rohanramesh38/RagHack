@@ -14,11 +14,12 @@ def get_message():
     user_message = request.json['message']
     api_endpoint = request.json['api_endpoint']
     api_key = request.json['api_key']
+    api_model_name = request.json['model_name']
 
     headers = {
         "content-type": "application/json",
         "authorization": f"Bearer {api_key}",
-        "azureml-model-deployment": "rag-hack-propmtflow-fitness-app",
+        "azureml-model-deployment": api_model_name,
         "accept":"*/*"
         
     }
