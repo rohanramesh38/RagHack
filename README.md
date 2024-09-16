@@ -22,7 +22,7 @@ This hybrid approach ensures accurate, context-aware, and personalized fitness g
 ### Implementation Overview:
 
 #### Data Extraction and Ingestion:
-![ArchitectureGraphRag](images/ArchitectureExtraction.png)
+![ArchitectureGraphRag](images/ArchitectureExtract.png)
 <p style="text-align:center;"><i>Fig 2. Data Extraction Architecture</i></p>
 
 <ul>
@@ -53,6 +53,9 @@ This hybrid approach ensures accurate, context-aware, and personalized fitness g
 ![AzureCosmoDB](images/graph2.png)
 <p style="text-align:center;"><i>Fig 4. Example of how Unstructured Data is stored as Graph in Azure CosmoDB(Gremlin API)</i></p>
 
+## Azure AI Studio:
+![AzureCosmoDB](images/ArchitectureAIstudio.png)
+<p style="text-align:center;"><i>Fig 5. Azure AI Studio Architecture</i></p>
 
 ### Prompt Flow
 We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent** endpoint, and the other is a **My Fitness Buddy**. These endpoints are designed to solve two different use cases: one focuses on optimizing document retrieval through query generation, while the other offers personalized fitness advice within predefined safe boundaries with the knowledge base of the RAG.
@@ -62,7 +65,7 @@ We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent
 
 <div style="text-align:center;">
     <img src="./images/rewiteintent.png" alt="rewrite intent" width="330"/>
-    <p><i>Fig 5. Flow of Rewrite Intent endpoint</i></p>
+    <p><i>Fig 6. Flow of Rewrite Intent endpoint</i></p>
 </div>
 
 
@@ -72,7 +75,7 @@ We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent
 
 <div style="text-align:center;">
     <img src="./images/myfitnessbudy.png" alt="rewite intent" width="450"/>
-    <p style="text-align:center;"><i>Fig 6. Flow of My Fitness Buddy endpoint </i></p>
+    <p style="text-align:center;"><i>Fig 7. Flow of My Fitness Buddy endpoint </i></p>
 </div>
 
 ### Application Flow:
@@ -86,10 +89,10 @@ We deployed two endpoints using **Azure Prompt Flow**. One is a **rewrite intent
 ![Application](images/app.png)
 ![Application](images/app1.png)
 ![Application](images/app2.png)
-<p style="text-align:center;"><i>Fig 7. Application</i></p>
+<p style="text-align:center;"><i>Fig 8. Application</i></p>
 
 ![Application](images/testingTool.png)
-<p style="text-align:center;"><i>Fig 7. Testing tool for endpoints</i></p>
+<p style="text-align:center;"><i>Fig 9. Testing tool for endpoints</i></p>
 
 ## Technologies Used:
 - **Data Storage and Retrieval:** Azure Blob Storage, Azure Cosmos DB (Gremlin API), Azure AI Search.
