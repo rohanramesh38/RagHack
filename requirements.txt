@@ -1,0 +1,14 @@
+requests
+beautifulsoup4
+pandas
+matplotlib
+streamlit
+streamlit
+python-dotenv
+openai
+azure-identity
+azure-search-documents
+azure-ai-textanalytics
+flask
+langchain-community
+gremlinpython==3.7.0
