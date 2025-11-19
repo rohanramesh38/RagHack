@@ -1,6 +1,6 @@
 # RagHack - GenAI Fitness Advisor App
 
-[![Microsoft RAGHack Hackathon Winner](https://img.shields.io/badge/🏆_Microsoft RAGHack Hackathon-Winner-76B900?style=for-the-badge)](https://github.com/rohanramesh38/RagHack/)
+[![Microsoft RAGHack Hackathon Winner](https://img.shields.io/badge/🏆_Microsoft_RAGHack_Hackathon-Winner-76B900?style=for-the-badge)](https://github.com/rohanramesh38/RagHack/)
 
 
 ## Problem Definition:
